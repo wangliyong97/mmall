@@ -213,4 +213,17 @@
     FROM  mmall_order
     where order_no = #{orderNo}
   </select>
+
+  <select id="selectByUserId" parameterType="int" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM  mmall_order
+    WHERE user_id = #{userId}
+  </select>
+
+  <select id="selectAllOrder" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM  mmall_order
+  </select>
 </mapper>

@@ -7,7 +7,9 @@ import java.util.Set;
 /**
  * Created by wangliyong on 2018/5/25.
  */
+
 public class Const {
+
     public static final String Current_USER = "currentUser";
 
     public static final String EMAIL = "email";
@@ -25,11 +27,29 @@ public class Const {
         String LIMIT_NUM_SUCCESS = "LIMIT_NUM_SUCCESS";
     }
 
-    public interface role{
-        int ROLE_CUSTOMER = 0;//普通用户
+    public interface Role{
+        int ROLE_CUSTOMER = 0; //普通用户
         int ROLE_ADMIN = 1;//管理员
-        //此处使用接口来取代繁重的枚举类
     }
+
+    public enum ProductStatusEnum{
+        ON_SALE(1,"在线");
+        private String value;
+        private int code;
+        ProductStatusEnum(int code,String value){
+            this.code = code;
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+    }
+
 
     public enum OrderStatusEnum{
         CANCELED(0,"已取消"),
@@ -64,6 +84,15 @@ public class Const {
             throw new RuntimeException("么有找到对应的枚举");
         }
     }
+    public interface  AlipayCallback{
+        String TRADE_STATUS_WAIT_BUYER_PAY = "WAIT_BUYER_PAY";
+        String TRADE_STATUS_TRADE_SUCCESS = "TRADE_SUCCESS";
+
+        String RESPONSE_SUCCESS = "success";
+        String RESPONSE_FAILED = "failed";
+    }
+
+
 
     public enum PayPlatformEnum{
         ALIPAY(1,"支付宝");
@@ -84,22 +113,15 @@ public class Const {
         }
     }
 
-    public interface  AlipayCallback{
-        String TRADE_STATUS_WAIT_BUYER_PAY = "WAIT_BUYER_PAY";
-        String TRADE_STATUS_TRADE_SUCCESS = "TRADE_SUCCESS";
+    public enum PaymentTypeEnum{
+        ONLINE_PAY(1,"在线支付");
 
-        String RESPONSE_SUCCESS = "success";
-        String RESPONSE_FAILED = "failed";
-    }
-
-    public enum ProductStatusEnum{
-        ON_SALE(1,"在线");
-        private String value;
-        private int code;
-        ProductStatusEnum(int code,String value){
+        PaymentTypeEnum(int code,String value){
             this.code = code;
             this.value = value;
         }
+        private String value;
+        private int code;
 
         public String getValue() {
             return value;
@@ -108,5 +130,21 @@ public class Const {
         public int getCode() {
             return code;
         }
+
+
+        public static PaymentTypeEnum codeOf(int code){
+            for(PaymentTypeEnum paymentTypeEnum : values()){
+                if(paymentTypeEnum.getCode() == code){
+                    return paymentTypeEnum;
+                }
+            }
+            throw new RuntimeException("么有找到对应的枚举");
+        }
+
     }
+
+
+
+
 }
+
