@@ -10,8 +10,6 @@ import com.mmall.service.IShippingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +17,7 @@ import java.util.Map;
  * Created by wangliyong on 2018/5/29.
  */
 @Service("iShippingService")
-public class ShippingServiceImpl {
+public class ShippingServiceImpl implements IShippingService{
 
     @Autowired
     private ShippingMapper shippingMapper;
