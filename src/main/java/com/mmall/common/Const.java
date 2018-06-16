@@ -27,7 +27,7 @@ public class Const {
         String LIMIT_NUM_SUCCESS = "LIMIT_NUM_SUCCESS";
     }
 
-    public interface Role{
+    public interface role{
         int ROLE_CUSTOMER = 0; //普通用户
         int ROLE_ADMIN = 1;//管理员
     }

@@ -3,7 +3,6 @@ package com.mmall.service;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 
-
 /**
  * Created by wangliyong on 2018/5/25.
  */
@@ -11,7 +10,6 @@ public interface IUserService {
     /**
      * 通过泛型做一个通用的响应对象
      */
-
     ServerResponse<User> login(String username, String password);
 
     ServerResponse<String> register(User user);
