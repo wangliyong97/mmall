@@ -1,6 +1,5 @@
 package com.mmall.dao;
 
-import com.mmall.common.ServerResponse;
 import com.mmall.pojo.Cart;
 import org.apache.ibatis.annotations.Param;
 
