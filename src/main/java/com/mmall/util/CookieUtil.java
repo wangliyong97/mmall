@@ -21,7 +21,7 @@ public class CookieUtil {
         Cookie[] cks = request.getCookies();
         if(cks != null){
             for(Cookie ck : cks){
-                log.info("read cookie Name{} cookie Value{}",ck.getName(),ck.getValue());
+                //log.info("read cookie Name{} cookie Value{}",ck.getName(),ck.getValue());
                 if(StringUtils.equals(ck.getName(),COOKIE_NAME)){
                     log.info("return cookie name{} cookie value{}",ck.getName(),ck.getValue());
                     return ck.getValue();

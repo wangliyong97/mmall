@@ -100,18 +100,18 @@ public class RedisPoolUtil {
     }
 
 
-    public static void main(String[] args) {
-        Jedis jedis = RedisPool.getJedis();
-        RedisPoolUtil.set("key1","value1");
-        String result = RedisPoolUtil.get("key1");
-
-        RedisPoolUtil.setEx("key2","value2",60*10);
-
-        RedisPoolUtil.expire("key2",100);
-
-        RedisPoolUtil.del("key2");
-
-        System.out.println(result);
-
-    }
+//    public static void main(String[] args) {
+//        Jedis jedis = RedisPool.getJedis();
+//        RedisPoolUtil.set("key1","value1");
+//        String result = RedisPoolUtil.get("key1");
+//
+//        RedisPoolUtil.setEx("key2","value2",60*10);
+//
+//        RedisPoolUtil.expire("key2",100);
+//
+//        RedisPoolUtil.del("key2");
+//
+//        System.out.println(result);
+//
+//    }
 }
