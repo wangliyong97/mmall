@@ -1,13 +1,14 @@
 package com.mmall.service.impl;
 
 import com.mmall.common.Const;
+import com.mmall.common.RedisPool;
 import com.mmall.common.ServerResponse;
-import com.mmall.common.TokenCache;
 import com.mmall.dao.UserMapper;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
 import com.mmall.util.MD5Util;
-import net.sf.jsqlparser.schema.Server;
+import com.mmall.util.RedisPoolUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.UUID;
  * Created by wangliyong on 2018/5/25.
  */
 
+@Slf4j
 @Service("iUserService")
 public class UserServiceImpl implements IUserService{
 
@@ -110,7 +112,9 @@ public class UserServiceImpl implements IUserService{
         if(resultCount>0){
             //说明验证答案正确
             String forgetToken = UUID.randomUUID().toString();
-            TokenCache.setKey(TokenCache.TOKEN_PREFIX+username, forgetToken);
+            log.info("forgetToken {}", forgetToken);
+
+            RedisPoolUtil.setEx(Const.TOKEN_PREFIX+username,forgetToken,60*60*12);
             return ServerResponse.createBySuccessMessage(forgetToken);
         }
         return ServerResponse.createByErrorMessage("答案错误");
@@ -125,7 +129,7 @@ public class UserServiceImpl implements IUserService{
             //用户不存在
             return ServerResponse.createByErrorMessage("用户不存在");
         }
-        String token = TokenCache.getKey(TokenCache.TOKEN_PREFIX+username);
+        String token = RedisPoolUtil.get(Const.TOKEN_PREFIX+username);
         if(StringUtils.isBlank(token)){
             return ServerResponse.createByErrorMessage("token无效或已过期");
         }
@@ -134,6 +138,7 @@ public class UserServiceImpl implements IUserService{
             String md5password = MD5Util.MD5EncodeUtf8(passwordNew);
             int rowcount = userMapper.updatePasswordByUsername(username, md5password);
             if(rowcount>0){
+                RedisPoolUtil.del(Const.TOKEN_PREFIX+username);
                 return ServerResponse.createBySuccessMessage("修改密码成功");
             }else{
                 return ServerResponse.createByErrorMessage("token错误，请重新获取重置密码的token");
