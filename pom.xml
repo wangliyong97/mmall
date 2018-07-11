@@ -259,7 +259,17 @@
     </dependency>
 
 
-      <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <!-- 迭代更新二 -->
+
+    <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>2.6.0</version>
+    </dependency>
+
+
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
       <dependency>
           <groupId>org.projectlombok</groupId>
           <artifactId>lombok</artifactId>

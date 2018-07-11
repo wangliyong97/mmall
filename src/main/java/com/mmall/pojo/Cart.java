@@ -2,6 +2,7 @@ package com.mmall.pojo;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Getter
@@ -22,4 +23,5 @@ public class Cart {
     private Date createTime;
 
     private Date updateTime;
+
 }
