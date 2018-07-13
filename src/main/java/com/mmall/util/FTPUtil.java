@@ -1,5 +1,7 @@
 package com.mmall.util;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.net.ftp.FTPClient;
 
@@ -12,6 +14,8 @@ import java.util.List;
  * Created by wangliyong on 2018/5/28.
  */
 
+@Getter
+@Setter
 @Slf4j
 public class FTPUtil {
 
@@ -81,43 +85,43 @@ public class FTPUtil {
     private String pwd;
     private FTPClient ftpClient;
 
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public FTPClient getFtpClient() {
-        return ftpClient;
-    }
-
-    public void setFtpClient(FTPClient ftpClient) {
-        this.ftpClient = ftpClient;
-    }
+//    public String getIp() {
+//        return ip;
+//    }
+//
+//    public void setIp(String ip) {
+//        this.ip = ip;
+//    }
+//
+//    public int getPort() {
+//        return port;
+//    }
+//
+//    public void setPort(int port) {
+//        this.port = port;
+//    }
+//
+//    public String getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(String user) {
+//        this.user = user;
+//    }
+//
+//    public String getPwd() {
+//        return pwd;
+//    }
+//
+//    public void setPwd(String pwd) {
+//        this.pwd = pwd;
+//    }
+//
+//    public FTPClient getFtpClient() {
+//        return ftpClient;
+//    }
+//
+//    public void setFtpClient(FTPClient ftpClient) {
+//        this.ftpClient = ftpClient;
+//    }
 }
