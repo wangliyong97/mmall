@@ -38,10 +38,11 @@ public class UserController {
      *
      * ResponseBody将返回值自动序列化为jackson
      */
-    @RequestMapping(value="login.do", method = RequestMethod.POST)
+    @RequestMapping(value="login.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session, HttpServletResponse httpServletResponse) {
         //service ->mybatis->dao
+
         ServerResponse<User> response = iUserService.login(username,password);
         if(response.isSuccess()){
 

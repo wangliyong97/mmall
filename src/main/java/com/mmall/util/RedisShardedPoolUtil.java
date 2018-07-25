@@ -1,11 +1,9 @@
 package com.mmall.util;
 
-import com.mmall.common.RedisPool;
 import com.mmall.common.RedisShardedPool;
 import lombok.extern.slf4j.Slf4j;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.ShardedJedis;
-import redis.clients.jedis.ShardedJedisPool;
+
 
 /**
  * Created by wangliyong on 2018/7/9.

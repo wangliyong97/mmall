@@ -8,7 +8,11 @@
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="com.mmall" annotation-config="true"/>
+    <!-- 将spring和springMVc扫描的包进行隔离 只扫描controller注解的 将默认全部扫描关闭 细化扫描的包为com.mmall.controller-->
+
+    <context:component-scan base-package="com.mmall" annotation-config="true" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <mvc:annotation-driven>
         <mvc:message-converters>
