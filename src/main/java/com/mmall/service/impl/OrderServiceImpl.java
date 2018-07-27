@@ -40,6 +40,7 @@ import com.mmall.vo.ShippingVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -603,6 +604,30 @@ public class OrderServiceImpl implements IOrderService {
             }
         }
         return ServerResponse.createByErrorMessage("订单不存在");
+    }
+
+    @Override
+    public void closeOrder(int hour) {
+        Date closeDateTime = DateUtils.addHours(new Date(),-hour);
+
+        List<Order> orderList = orderMapper.selectOrderStatusByCreateTime(Const.OrderStatusEnum.NO_PAY.getCode(),DateTimeUtil.dateToStr(closeDateTime));
+
+        for(Order order:orderList){
+            List<OrderItem> orderItemList = orderItemMapper.getByOrderNo(order.getOrderNo());
+            for(OrderItem orderItem : orderItemList){
+                //必须使用主键防止锁表   使用主键会使用行锁而不使用会使用表锁  支持mysql的innodb引擎
+                Integer stock = productMapper.selectStockByProductId(orderItem.getId());
+                if(stock == null){
+                    continue;
+                }
+                Product product = new Product();
+                product.setId(orderItem.getProductId());
+                product.setStock(stock+orderItem.getQuantity());
+                productMapper.updateByPrimaryKeySelective(product);
+            }
+            orderMapper.closeOrderByOrderId(order.getId());
+            log.info("关闭订单OrderNum:{}",order.getOrderNo());
+        }
     }
 
 
